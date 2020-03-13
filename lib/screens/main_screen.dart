@@ -1,6 +1,7 @@
 import 'package:daily_diary/customs/customClass.dart';
 import 'package:daily_diary/customs/customWidgets.dart';
 import 'package:daily_diary/screens/entry_screen.dart';
+import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,23 +82,25 @@ class _MainScreenState extends State<MainScreen> {
                 Expanded(
                   child: ScrollConfiguration(
                     behavior: CustomScrollBehavior(),
-                    child: ListView(
-                      children: <Widget>[
-                        customCard('November 14', 'Event'),
-                        customCard('November 17', 'Another Event'),
-                        customCard('November 14', 'Event'),
-                        customCard('November 17', 'Another Event'),
-                        customCard('November 14', 'Event'),
-                        customCard('November 17', 'Another Event'),
-                        customCard('November 14', 'Event'),
-                        customCard('November 17', 'Another Event'),
-                        customCard('November 14', 'Event'),
-                        customCard('November 17', 'Another Event'),
-                      ],
+                    child: FadingEdgeScrollView.fromScrollView(
+                      child: ListView(
+                        controller: _scrollController,
+                        children: <Widget>[
+                          customCard('October 14', 'Event'),
+                          customCard('October 17', 'Another Event'),
+                          customCard('October 20', 'Event'),
+                          customCard('October 30', 'Another Event'),
+                          customCard('November 1', 'Event'),
+                          customCard('November 5', 'Another Event'),
+                          customCard('November 14', 'Event'),
+                          customCard('November 17', 'Another Event'),
+                          customCard('November 21', 'Event'),
+                          customCard('November 28', 'Another Event'),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                // Expanded(child: Text('da')),
               ],
             ),
           ),
