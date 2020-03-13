@@ -1,3 +1,6 @@
+import 'package:daily_diary/customs/customClass.dart';
+import 'package:daily_diary/customs/customWidgets.dart';
+import 'package:daily_diary/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,6 +24,13 @@ class _MainScreenState extends State<MainScreen> {
         ),
         title: Text('Journal'),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EntryScreen()));
+            },
+          ),
           IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
         ],
       ),
@@ -35,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(top: 10),
-            // TextField need to be changed as Background goes 
+            // TextField need to be changed as Background goes
             // square when focused
             child: TextField(
               decoration: InputDecoration(
@@ -45,7 +55,10 @@ class _MainScreenState extends State<MainScreen> {
                 suffixIcon: Icon(Icons.search),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.white, width: 0),
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 0,
+                  ),
                 ),
               ),
             ),
@@ -60,32 +73,33 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           SizedBox(height: 25),
-          Container(
+          Expanded(
             child: Column(
               children: <Widget>[
-                customCard('November 14', 'Event'),
-                customCard('November 17', 'Another Event'),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: CustomScrollBehavior(),
+                    child: ListView(
+                      children: <Widget>[
+                        customCard('November 14', 'Event'),
+                        customCard('November 17', 'Another Event'),
+                        customCard('November 14', 'Event'),
+                        customCard('November 17', 'Another Event'),
+                        customCard('November 14', 'Event'),
+                        customCard('November 17', 'Another Event'),
+                        customCard('November 14', 'Event'),
+                        customCard('November 17', 'Another Event'),
+                        customCard('November 14', 'Event'),
+                        customCard('November 17', 'Another Event'),
+                      ],
+                    ),
+                  ),
+                ),
+                // Expanded(child: Text('da')),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget customCard(String subject, String body) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ListTile(
-        title: Text(
-          subject,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text(body),
       ),
     );
   }
